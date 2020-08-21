@@ -1,0 +1,110 @@
+body {
+  width: 300px;
+  text-align: center;
+  font-family: sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: calc(10px + 1vmin);
+  padding: 0;
+  margin: 0;
+}
+
+main.main {
+  padding: 10px;
+}
+
+.tab {
+  visibility: hidden;
+  display: none;
+  font-size: calc(7px + 1vmin);
+}
+
+.tab-active {
+  visibility: visible;
+  display: block;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: transparent;
+  border: 1px solid #000;
+  transition: all 0.3s;
+}
+
+button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+footer.footer {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  border-top: 1px solid #eee;
+  padding: 10px 0;
+}
+
+ul.footer-menu {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+li.footer-menu-item {
+  list-style-type: none;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  -ms-align-items: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 10px;
+  width: 100%;
+}
+
+li.footer-menu-item svg {
+  fill: #8C8C8C;
+}
+
+li.footer-menu-item .menu-item-badge {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: transparent;
+  margin-bottom: 5px;
+}
+
+li.footer-menu-item .menu-item-badge img {
+  width: 100%;
+  height: auto;
+}
+
+li.footer-menu-item__active {
+  color: #69E781;
+}
+
+li.footer-menu-item__active svg {
+  fill: #69E781;
+}

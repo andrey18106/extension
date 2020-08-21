@@ -1,0 +1,17 @@
+{
+    "name": "My browser extension",
+    "version": "0.0.1",
+    "description": "Test extension for browser",
+    "permissions": ["tabs", "storage"],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "browser_action": {
+        "default_popup": "./popup/popup.html"
+    },
+    "icons": {
+        "128": "images/edit-tools.png"
+    },
+    "manifest_version": 2
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Hide History Extension</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+
+  <main class="main">
+    <img src="images/edit-tools.png" width="64" height="64" alt="logo" />
+    <div class="tab tab-add tab-active" id="tab-add">
+      <h1>Add site</h1>
+    </div>
+    <div class="tab tab-list" id="tab-list">
+      <h1>List of sites with blocked history</h1>
+    </div>
+    <div class="tab tab-settings" id="tab-settings">
+      <h1>Settings</h1>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <ul class='footer-menu'>
+      <li class="footer-menu-item footer-menu-item__active" data-tab-id="add">
+        <span class="menu-item-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+            x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"
+            width="100%" height="100%">
+            <g>
+              <g>
+                <g>
+                  <path
+                    d="M256,0C114.84,0,0,114.84,0,256s114.84,256,256,256s256-114.84,256-256S397.16,0,256,0z M256,475.429 c-120.997,0-219.429-98.432-219.429-219.429S135.003,36.571,256,36.571S475.429,135.003,475.429,256S376.997,475.429,256,475.429z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M256,134.095c-10.1,0-18.286,8.186-18.286,18.286v207.238c0,10.1,8.186,18.286,18.286,18.286 c10.1,0,18.286-8.186,18.286-18.286V152.381C274.286,142.281,266.1,134.095,256,134.095z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M359.619,237.714H152.381c-10.1,0-18.286,8.186-18.286,18.286c0,10.1,8.186,18.286,18.286,18.286h207.238 c10.1,0,18.286-8.186,18.286-18.286C377.905,245.9,369.719,237.714,359.619,237.714z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+            </g>
+          </svg>
+        </span>
+        Add
+      </li>
+      <li class="footer-menu-item" data-tab-id="list">
+        <span class="menu-item-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+            x="0px" y="0px" viewBox="0 0 477.867 477.867" style="enable-background:new 0 0 477.867 477.867;"
+            xml:space="preserve" width="100%" height="100%">
+            <g>
+              <g>
+                <g>
+                  <path
+                    d="M426.667,0H51.2C22.923,0,0,22.923,0,51.2v375.467c0,28.277,22.923,51.2,51.2,51.2h375.467 c28.277,0,51.2-22.923,51.2-51.2V51.2C477.867,22.923,454.944,0,426.667,0z M443.733,426.667c0,9.426-7.641,17.067-17.067,17.067    H51.2c-9.426,0-17.067-7.641-17.067-17.067V51.2c0-9.426,7.641-17.067,17.067-17.067h375.467c9.426,0,17.067,7.641,17.067,17.067 V426.667z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M153.6,102.4h-51.2c-9.426,0-17.067,7.641-17.067,17.067s7.641,17.067,17.067,17.067h51.2 c9.426,0,17.067-7.641,17.067-17.067S163.026,102.4,153.6,102.4z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M375.467,102.4h-153.6c-9.426,0-17.067,7.641-17.067,17.067s7.641,17.067,17.067,17.067h153.6 c9.426,0,17.067-7.641,17.067-17.067S384.892,102.4,375.467,102.4z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M153.6,221.867h-51.2c-9.426,0-17.067,7.641-17.067,17.067S92.974,256,102.4,256h51.2c9.426,0,17.067-7.641,17.067-17.067 S163.026,221.867,153.6,221.867z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M375.467,221.867h-153.6c-9.426,0-17.067,7.641-17.067,17.067S212.441,256,221.867,256h153.6 c9.426,0,17.067-7.641,17.067-17.067S384.892,221.867,375.467,221.867z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M153.6,341.333h-51.2c-9.426,0-17.067,7.641-17.067,17.067s7.641,17.067,17.067,17.067h51.2 c9.426,0,17.067-7.641,17.067-17.067S163.026,341.333,153.6,341.333z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M375.467,341.333h-153.6c-9.426,0-17.067,7.641-17.067,17.067s7.641,17.067,17.067,17.067h153.6 c9.426,0,17.067-7.641,17.067-17.067S384.892,341.333,375.467,341.333z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+            </g>
+          </svg>
+        </span>
+        List
+      </li>
+      <li class="footer-menu-item" data-tab-id="settings">
+        <span class="menu-item-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+            x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"
+            width="100%" height="100%">
+            <g>
+              <g>
+                <g>
+                  <path
+                    d="M435.2,84.48V25.6c0-12.8-10.24-25.6-25.6-25.6C396.8,0,384,12.8,384,25.6v58.88c-15.36,7.68-25.6,23.04-25.6,43.52    c0,17.92,10.24,35.84,25.6,43.52V486.4c0,15.36,12.8,25.6,25.6,25.6c15.36,0,25.6-10.24,25.6-25.6V171.52 c15.36-7.68,25.6-25.6,25.6-43.52C460.8,107.52,450.56,92.16,435.2,84.48z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M128,161.28V25.6C128,12.8,117.76,0,102.4,0C89.6,0,76.8,12.8,76.8,25.6v135.68c-15.36,7.68-25.6,23.04-25.6,43.52    c0,17.92,10.24,35.84,25.6,43.52V486.4c0,15.36,12.8,25.6,25.6,25.6c15.36,0,25.6-10.24,25.6-25.6V248.32 c15.36-7.68,25.6-25.6,25.6-43.52C153.6,184.32,143.36,168.96,128,161.28z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M281.6,289.28V25.6C281.6,12.8,271.36,0,256,0c-12.8,0-25.6,12.8-25.6,25.6v263.68c-15.36,7.68-25.6,23.04-25.6,43.52    c0,17.92,10.24,35.84,25.6,43.52V486.4c0,15.36,12.8,25.6,25.6,25.6c15.36,0,25.6-10.24,25.6-25.6V376.32 c15.36-7.68,25.6-25.6,25.6-43.52C307.2,312.32,296.96,296.96,281.6,289.28z"
+                    data-original="#000000" class="active-path" data-old_color="#000000" />
+                </g>
+              </g>
+            </g>
+          </svg>
+        </span>
+        Settings
+      </li>
+    </ul>
+  </footer>
+
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
