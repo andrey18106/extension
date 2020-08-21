@@ -12,8 +12,20 @@ body {
   margin: 0;
 }
 
+header.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+header.header img {
+  margin-right: 5px;
+}
+
 main.main {
-  padding: 10px;
+  padding: 20px 10px;
 }
 
 .tab {
@@ -27,18 +39,15 @@ main.main {
   display: block;
 }
 
-button {
-  outline: none;
-  cursor: pointer;
-  padding: 5px 10px;
-  background-color: transparent;
-  border: 1px solid #000;
-  transition: all 0.3s;
-}
-
-button:hover {
-  background-color: #000;
+.hide-history-btn {
+  border-radius: 20px;
+  background-color: #69E781;
   color: #fff;
+  padding: 10px 20px;
+  width: 100%;
+  max-width: 200px;
+  border: 1px solid #eee;
+  cursor: pointer;
 }
 
 footer.footer {
