@@ -1,7 +1,6 @@
 {
     "name": "My browser extension",
     "version": "0.0.1",
-    "default_locale": "en",
     "description": "Test extension for browser",
     "permissions": ["tabs", "storage"],
     "background": {
