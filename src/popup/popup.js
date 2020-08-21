@@ -44,15 +44,18 @@ window.onload = () => {
     chrome.tabs.query({ active: true, currentWindow: true }, tab => {
         console.log(tab);
         active_tab_name_div.innerHTML = extractHostname(tab[0].url);
+
+        let img = document.createElement('img');
+        img.alt = 'active tab icon';
+        img.width = '32';
+        img.height = '32';
+        img.style.marginRight = '5px';
         if (tab[0].favIconUrl) {
-            let img = document.createElement('img');
-            img.alt = 'active tab icon';
-            img.width = '32';
-            img.height = '32';
-            img.src = tab[0].favIconUrl;
             img.style.borderRadius = '50%';
-            img.style.marginRight = '5px';
-            active_tab_name_div.parentNode.insertBefore(img, active_tab_name_div);
+            img.src = tab[0].favIconUrl;
+        } else {
+            img.src = '../images/empty.svg';
         }
+        active_tab_name_div.parentNode.insertBefore(img, active_tab_name_div);
     })
 }
