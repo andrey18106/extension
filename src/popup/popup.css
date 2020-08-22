@@ -185,12 +185,16 @@ header.header img {
 .donate-btn {
   background-color: #eee;
   color: #fff;
-  font-weight: bold;
   font-size: 16px;
 }
 
 .write-us-btn {
   padding: 10px 20px;
+  transition: border 0.2s;
+}
+
+.write-us-btn:hover {
+  border: 1px solid #c8c8c8;
 }
 
 .setting-mark-soon {
