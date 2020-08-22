@@ -7,7 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: calc(10px + 1vmin);
+  font-size: 12px;
   padding: 0;
   margin: 0;
 }
@@ -24,14 +24,18 @@ header.header img {
   margin-right: 5px;
 }
 
-main.main {
-  padding: 20px 10px;
-}
-
 .tab {
   visibility: hidden;
   display: none;
+}
+
+.tab-add {
+  padding: 20px 10px;
   font-size: calc(7px + 1vmin);
+}
+
+.tab-settings {
+  padding: 0 0 20px;
 }
 
 .tab-active {
@@ -41,15 +45,21 @@ main.main {
 
 .tab-list {
   min-height: 100px;
-  padding: 0 20px;
+  padding: 0 30px;
 }
 
 .site-list {
   padding: 0;
-  margin: 0;
+  margin: 10px 0 20px;
   width: 100%;
   max-height: 150px;
   overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.site-list::-webkit-scrollbar {
+  display: none;
 }
 
 .site-list-item {
@@ -59,9 +69,14 @@ main.main {
   align-items: center;
   margin-bottom: 10px;
 }
+
 .site-list-item .site-info {
   display: flex;
   align-items: center;
+}
+
+.site-list-item:last-child {
+  margin-bottom: 0;
 }
 
 .site-domain {
@@ -116,6 +131,48 @@ main.main {
   max-width: 150px;
   border: 1px solid #1b0e3f;
   cursor: pointer;
+  font-weight: bold;
+}
+
+.settings-list {
+  padding: 0;
+  margin: 0 0 20px;
+}
+
+.settings-list-item {
+  display: flex;
+  list-style-type: none;
+  font-size: 12px;
+  
+  border-top: 1px solid #eee;
+}
+.settings-list-item:last-child {
+  border-bottom: 1px solid #eee;
+}
+
+.setting-input-group {
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkbox-group {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.setting-mark {
+  color: #bebebe;
+}
+
+.setting-mark-soon {
+  border: 1px solid #eee;
+  border-radius: 5px;
+  color: #bebebe;
+  padding: 5px 10px;
 }
 
 footer.footer {

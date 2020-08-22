@@ -171,7 +171,7 @@ window.onload = () => {
         });
 
         chrome.history.search({text: extractHostname(tab[0].url)}, (results) => {
-            console.log(results);
+            active_tab_name_div.innerHTML += " (" + results.length + ")";
         })
     });
 
