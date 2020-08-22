@@ -168,11 +168,41 @@ header.header img {
   color: #bebebe;
 }
 
+.support-block {
+  padding: 10px 25px;
+  color: #bebebe;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+}
+
+.donate-btn, .write-us-btn {
+  width: 100%;
+  border: 1px solid #eee;
+  display: inline-block;
+  padding: 5px 20px;
+  border-radius: 30px;
+  color: #bebebe;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.donate-btn {
+  background-color: #eee;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.write-us-btn {
+  padding: 10px 20px;
+}
+
 .setting-mark-soon {
   border: 1px solid #eee;
   border-radius: 5px;
   color: #bebebe;
   padding: 5px 10px;
+  font-weight: bold;
 }
 
 footer.footer {
