@@ -6,3 +6,7 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 
 });
+
+chrome.storage.onChanged.addListener((changes, areaName) => {
+  console.log(changes, areaName);
+})

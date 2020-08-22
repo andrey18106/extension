@@ -2,7 +2,7 @@
     "name": "Hide Site History",
     "version": "0.0.1",
     "description": "Test version of extension for browser for hiding history of sites in the list",
-    "permissions": ["tabs", "storage"],
+    "permissions": ["tabs", "storage", "history"],
     "background": {
         "scripts": ["src/background.js"],
         "persistent": false

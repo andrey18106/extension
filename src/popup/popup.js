@@ -131,7 +131,15 @@ window.onload = () => {
                         'url': extractHostname(tab[0].url)
                     }));
                     hide_history_btn.setAttribute('disabled', 'disabled');
-                    hide_history_btn.innerHTML = 'History of this site is hidden'; 
+                    hide_history_btn.innerHTML = 'History of this site is hidden';
+                    try {
+                        // ToDo Figure out why history doesn't removed from browser history
+                        chrome.history.deleteUrl({url: "https://" + extractHostname(tab[0].url)}, () => {
+                            console.log('Site history of ' + "https://" + extractHostname(tab[0].url) +' successfully deleted!');
+                        });
+                    } catch (error) {
+                        console.error(error);
+                    }
                 });
             });
         });

@@ -48,6 +48,8 @@ main.main {
   padding: 0;
   margin: 0;
   width: 100%;
+  max-height: 150px;
+  overflow-y: scroll;
 }
 
 .site-list-item {
@@ -94,6 +96,7 @@ main.main {
   max-width: 200px;
   border: 1px solid #eee;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .hide-history-btn:disabled {
