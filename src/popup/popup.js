@@ -88,6 +88,14 @@ function createListItem(site) {
     return list_item;
 }
 
+function removeSiteHistory(site_url) {
+    chrome.history.search({text: site_url}, (results) => {
+        for (let result of results) {
+            chrome.history.deleteUrl({url: result.url});
+        }
+    });
+}
+
 window.onload = () => {
 
     // Tab "Add" handlers
@@ -132,14 +140,7 @@ window.onload = () => {
                     }));
                     hide_history_btn.setAttribute('disabled', 'disabled');
                     hide_history_btn.innerHTML = 'History of this site is hidden';
-                    try {
-                        // ToDo Figure out why history doesn't removed from browser history
-                        chrome.history.deleteUrl({url: "https://" + extractHostname(tab[0].url)}, () => {
-                            console.log('Site history of ' + "https://" + extractHostname(tab[0].url) +' successfully deleted!');
-                        });
-                    } catch (error) {
-                        console.error(error);
-                    }
+                    removeSiteHistory(extractHostname(tab[0].url));
                 });
             });
         });
@@ -168,6 +169,10 @@ window.onload = () => {
                 hide_history_btn.innerHTML = 'History of this site is hidden';
             }
         });
+
+        chrome.history.search({text: extractHostname(tab[0].url)}, (results) => {
+            console.log(results);
+        })
     });
 
     // ------------------
