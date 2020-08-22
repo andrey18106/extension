@@ -39,6 +39,52 @@ main.main {
   display: block;
 }
 
+.tab-list {
+  min-height: 100px;
+  padding: 0 20px;
+}
+
+.site-list {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.site-list-item {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.site-list-item .site-info {
+  display: flex;
+  align-items: center;
+}
+
+.site-domain {
+  font-size: 14px;
+}
+
+.site-list-item img {
+  margin-right: 10px;
+}
+
+.remove-site-btn {
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+  width: 28px;
+  height: 28px;
+}
+
+.remove-site-btn svg {
+  fill: #ff6666;
+  pointer-events: none;
+}
+
 .hide-history-btn {
   border-radius: 20px;
   background-color: #69E781;
@@ -47,6 +93,17 @@ main.main {
   width: 100%;
   max-width: 200px;
   border: 1px solid #eee;
+  cursor: pointer;
+}
+
+.clear-storage-btn {
+  border-radius: 20px;
+  background-color: #e76969;
+  color: #fff;
+  padding: 10px 20px;
+  width: 100%;
+  max-width: 150px;
+  border: 1px solid #1b0e3f;
   cursor: pointer;
 }
 

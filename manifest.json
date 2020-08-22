@@ -1,7 +1,7 @@
 {
-    "name": "My browser extension",
+    "name": "Hide Site History",
     "version": "0.0.1",
-    "description": "Test extension for browser",
+    "description": "Test version of extension for browser for hiding history of sites in the list",
     "permissions": ["tabs", "storage"],
     "background": {
         "scripts": ["src/background.js"],
