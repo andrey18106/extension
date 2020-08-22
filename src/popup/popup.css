@@ -126,17 +126,15 @@ header.header img {
   border-radius: 20px;
   background-color: #e76969;
   color: #fff;
-  padding: 10px 20px;
-  width: 100%;
-  max-width: 150px;
-  border: 1px solid #1b0e3f;
+  padding: 7px 15px;
+  border: 1px solid #bebebe;
   cursor: pointer;
   font-weight: bold;
+  margin-left: 10px;
 }
 
 .settings-list {
   padding: 0;
-  margin: 0 0 20px;
 }
 
 .settings-list-item {
@@ -169,10 +167,8 @@ header.header img {
 }
 
 .support-block {
-  padding: 10px 25px;
+  padding: 0 25px;
   color: #bebebe;
-  border-top: 1px solid #eee;
-  margin-top: 20px;
 }
 
 .donate-btn, .write-us-btn {
