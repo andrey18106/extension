@@ -9,3 +9,4 @@ Test version of extension for browser for hiding history of sites in the list.
  - [ ] Implement interaction of extension with browser history
  - [ ] Overall refactoring and optimizations
  - [ ] Add micro-iteraction animations for better UX
+ - [ ] Add internationalization (i18n)
