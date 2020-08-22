@@ -16,8 +16,8 @@ header.header {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 0;
   border-bottom: 1px solid #eee;
+  font-size: 12px;
 }
 
 header.header img {
@@ -94,6 +94,14 @@ main.main {
   max-width: 200px;
   border: 1px solid #eee;
   cursor: pointer;
+}
+
+.hide-history-btn:disabled {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #eee;
+  cursor: default;
+  font-size: 12px;
 }
 
 .clear-storage-btn {
