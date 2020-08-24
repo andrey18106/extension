@@ -101,8 +101,34 @@ function removeSiteHistory(site_url) {
     });
 }
 
+function updateSettings(settings) {
+    chrome.storage.sync.set({'settings': settings}, () => {
+        console.log('Settings updated');
+    });
+}
+
+function loadSettings() {
+    // TODO: Loading settings from browser storage
+    chrome.storage.sync.get('settings', (result) => {
+        for (let setting in result.settings['tab-settings']) {
+            let setting_checkbox = document.getElementById(setting + '_checkbox');
+            if (result.settings['tab-settings'][setting]['value']) {
+                setting_checkbox.setAttribute('checked', '');
+            } else if (setting_checkbox.hasAttribute('checked')) {
+                setting_checkbox.removeAttribute('checked');
+            }
+            setting_checkbox.addEventListener('change', () => {
+                result.settings['tab-settings'][setting]['value'] = setting_checkbox.checked;
+                updateSettings(result.settings);
+            });
+        }
+    });
+}
+
 
 window.onload = () => {
+
+    loadSettings();
 
     // Tab "Add" handlers
 
@@ -110,7 +136,7 @@ window.onload = () => {
     let tab_controls = document.getElementsByClassName('footer-menu-item');
 
     for (let tab_control of tab_controls) {
-        tab_control.addEventListener('click', event => {
+        tab_control.addEventListener('click', () => {
             let selected_tab = document.getElementById('tab-' + tab_control.getAttribute('data-tab-id'));
 
             for (let tab of tabs) {
@@ -146,7 +172,12 @@ window.onload = () => {
                     }));
                     hide_history_btn.setAttribute('disabled', 'disabled');
                     hide_history_btn.innerHTML = 'History of this site is hidden';
-                    removeSiteHistory(extractHostname(tab[0].url));
+                    chrome.storage.sync.get('settings', (results) => {
+                        let delete_history = results.settings['tab-settings']['delete_after_hiding']['value'];
+                        if (delete_history) {
+                            removeSiteHistory(extractHostname(tab[0].url));
+                        }
+                    });
                 });
             });
         });
@@ -204,10 +235,12 @@ window.onload = () => {
 
     let clear_storage_btn = document.querySelector('.clear-storage-btn');
     clear_storage_btn.addEventListener('click', () => {
-        chrome.storage.sync.clear(error => {
-            console.error(error);
-        });
-        alert('Storage successfully cleaned!');
+        if (confirm('Are you sure you want clear all settings and site list?')) {
+            chrome.storage.sync.clear(error => {
+                console.error(error);
+            });
+            alert('Storage successfully cleaned!');
+        }
     });
 
     // -----------------------
