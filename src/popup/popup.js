@@ -27,6 +27,7 @@ function removeSiteFromList(event) {
                 let hide_history_btn = document.querySelector('.hide-history-btn');
                 hide_history_btn.removeAttribute('disabled');
                 hide_history_btn.innerHTML = 'Hide history of this site';
+                document.querySelector('.active-tab-name').classList.remove('active-tab-name__hidden');
             });
         }
     })
@@ -108,7 +109,6 @@ function updateSettings(settings) {
 }
 
 function loadSettings() {
-    // TODO: Loading settings from browser storage
     chrome.storage.sync.get('settings', (result) => {
         for (let setting in result.settings['tab-settings']) {
             let setting_checkbox = document.getElementById(setting + '_checkbox');
@@ -176,6 +176,9 @@ window.onload = () => {
                         let delete_history = results.settings['tab-settings']['delete_after_hiding']['value'];
                         if (delete_history) {
                             removeSiteHistory(extractHostname(tab[0].url));
+                            let history_count = document.querySelector('.active-tab-name > b');
+                            history_count.innerHTML = " (0)";
+                            active_tab_name_div.classList.add('active-tab-name__hidden');
                         }
                     });
                 });
@@ -204,11 +207,14 @@ window.onload = () => {
                 console.log('Site exists in list');
                 hide_history_btn.setAttribute('disabled', 'disabled');
                 hide_history_btn.innerHTML = 'History of this site is hidden';
+                active_tab_name_div.classList.add('active-tab-name__hidden');
             }
         });
 
         chrome.history.search({text: extractHostname(tab[0].url)}, (results) => {
-            active_tab_name_div.innerHTML += " (" + results.length + ")";
+            let history_count = document.createElement('b');
+            history_count.innerHTML = " (" + results.length + ")";
+            active_tab_name_div.appendChild(history_count);
         })
     });
 

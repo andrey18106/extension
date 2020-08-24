@@ -24,6 +24,10 @@ header.header img {
   margin-right: 5px;
 }
 
+.active-tab-name__hidden {
+  color: #69E781;
+}
+
 .tab {
   visibility: hidden;
   display: none;
@@ -112,6 +116,14 @@ header.header img {
   border: 1px solid #eee;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+.hide-history-btn:hover {
+  background-color: #60dd78;
+}
+
+.hide-history-btn:active {
+  background-color: #56d36e;
 }
 
 .hide-history-btn:disabled {
