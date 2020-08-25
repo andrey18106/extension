@@ -30,7 +30,7 @@ function removeSiteFromList(event) {
                 document.querySelector('.active-tab-name').classList.remove('active-tab-name__hidden');
             });
         }
-    })
+    });
 }
 
 
@@ -60,7 +60,12 @@ function createListItem(site) {
     site_info.appendChild(site_icon);
     site_info.appendChild(site_domain);
 
-    site_icon.src = site.favIconUrl;
+    if (site.favIconUrl) {
+        site_icon.src = site.favIconUrl;
+    } else {
+        site_icon.src = '../images/empty.svg';
+    }
+
     site_icon.alt = site.url;
     site_icon.width = '16';
     site_icon.height = '16';
@@ -179,6 +184,7 @@ window.onload = () => {
                             let history_count = document.querySelector('.active-tab-name > b');
                             history_count.innerHTML = " (0)";
                             active_tab_name_div.classList.add('active-tab-name__hidden');
+                            chrome.browserAction.setBadgeText({text: "0", tabId: tab[0].id});
                         }
                     });
                 });
@@ -215,7 +221,8 @@ window.onload = () => {
             let history_count = document.createElement('b');
             history_count.innerHTML = " (" + results.length + ")";
             active_tab_name_div.appendChild(history_count);
-        })
+            chrome.browserAction.setBadgeText({text: String(results.length), tabId: tab[0].id});
+        });
     });
 
     // ------------------
