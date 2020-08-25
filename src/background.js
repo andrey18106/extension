@@ -24,6 +24,16 @@ function removeSiteHistory(site_url) {
     });
 }
 
+function siteExists(url, callback) {
+    chrome.storage.sync.get('site_list', (result) => {
+        if (result.site_list) {
+            if (url in result.site_list) {
+                callback(true);
+            }
+        }
+    });
+}
+
 function setupDefaultSettings() {
     let settings = {
         "tab-settings": {
@@ -75,15 +85,23 @@ function updateBadge(tabId) {
 
 chrome.tabs.onHighlighted.addListener((highLightInfo) => {
     updateBadge(highLightInfo.tabIds[0]);
+    chrome.tabs.get(highLightInfo.tabIds[0], (tab) => {
+        siteExists(extractHostname(tab.url), (result) => {
+            if (result) {
+                removeSiteHistory(extractHostname(tab.url));
+                updateBadge(highLightInfo.tabIds[0]);
+            }
+        });
+    });
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     updateBadge(tabId);
-    chrome.storage.sync.get('site_list', (result) => {
-        if (extractHostname(tab.url) in result.site_list) {
+    siteExists(extractHostname(tab.url), (result) => {
+        if (result) {
             removeSiteHistory(extractHostname(tab.url));
             updateBadge(tabId);
             console.log('History successfully re-cleared');
         }
-    })
+    });
 });
