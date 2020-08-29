@@ -38,6 +38,21 @@ header.header img {
   font-size: calc(7px + 1vmin);
 }
 
+.consider-similar-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0 0;
+}
+
+.consider-similar-group .switch {
+  height: 24px;
+}
+
+.consider-similar-group span {
+  font-size: 12px;
+}
+
 .tab-settings {
   padding: 0 0 20px;
 }

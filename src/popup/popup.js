@@ -19,7 +19,7 @@ function extractHostname(url) {
 
 function removeSiteFromList(event) {
     event.target.parentNode.parentNode.removeChild(event.target.parentNode);
-    chrome.storage.sync.get('site_list', (result) => {
+    chrome.storage.sync.get('site_list', result => {
         let current_site_list = result.site_list;
         if (delete current_site_list[event.target.getAttribute('data-site')]) {
             chrome.storage.sync.set({ site_list: current_site_list }, () => {
@@ -35,10 +35,12 @@ function removeSiteFromList(event) {
 
 
 function siteExists(url, callback) {
-    chrome.storage.sync.get('site_list', (result) => {
+    chrome.storage.sync.get('site_list', result => {
         if (result.site_list) {
             if (url in result.site_list) {
                 callback(true);
+            } else {
+                callback(false);
             }
         }
     });
@@ -100,21 +102,21 @@ function createListItem(site) {
 function removeSiteHistory(site_url) {
     // Searches the history for the last visit time
     // TODO: Change for searching the history for all the visit time
-    chrome.history.search({text: site_url}, (results) => {
+    chrome.history.search({ text: site_url }, results => {
         for (let result of results) {
-            chrome.history.deleteUrl({url: result.url});
+            chrome.history.deleteUrl({ url: result.url });
         }
     });
 }
 
 function updateSettings(settings) {
-    chrome.storage.sync.set({'settings': settings}, () => {
+    chrome.storage.sync.set({ 'settings': settings }, () => {
         console.log('Settings updated');
     });
 }
 
 function loadSettings() {
-    chrome.storage.sync.get('settings', (result) => {
+    chrome.storage.sync.get('settings', result => {
         for (let setting in result.settings['tab-settings']) {
             let setting_checkbox = document.getElementById(setting + '_checkbox');
             if (result.settings['tab-settings'][setting]['value']) {
@@ -159,14 +161,16 @@ window.onload = () => {
 
     let active_tab_name_div = document.querySelector('.active-tab-name');
     let hide_history_btn = document.querySelector('.hide-history-btn');
+    let consider_similar_checkbox = document.getElementById('consider_similar_checkbox');
 
     hide_history_btn.addEventListener('click', () => {
         chrome.tabs.query({ active: true, currentWindow: true }, tab => {
-            chrome.storage.sync.get('site_list', (result) => {
+            chrome.storage.sync.get('site_list', result => {
                 let current_site_list = result.site_list ? result.site_list : {};
                 let new_site = {
                     'favIconUrl': tab[0].favIconUrl,
-                    'url': extractHostname(tab[0].url)
+                    'url': extractHostname(tab[0].url),
+                    'consider_similar': false
                 }
                 current_site_list[extractHostname(tab[0].url).toString()] = new_site;
                 chrome.storage.sync.set({ site_list: current_site_list }, () => {
@@ -177,19 +181,23 @@ window.onload = () => {
                     }));
                     hide_history_btn.setAttribute('disabled', 'disabled');
                     hide_history_btn.innerHTML = 'History of this site is hidden';
-                    chrome.storage.sync.get('settings', (results) => {
+                    chrome.storage.sync.get('settings', results => {
                         let delete_history = results.settings['tab-settings']['delete_after_hiding']['value'];
                         if (delete_history) {
                             removeSiteHistory(extractHostname(tab[0].url));
                             let history_count = document.querySelector('.active-tab-name > b');
                             history_count.innerHTML = " (0)";
                             active_tab_name_div.classList.add('active-tab-name__hidden');
-                            chrome.browserAction.setBadgeText({text: "0", tabId: tab[0].id});
+                            chrome.browserAction.setBadgeText({ text: "0", tabId: tab[0].id });
                         }
                     });
                 });
             });
         });
+
+        if (consider_similar_checkbox.hasAttribute('disabled')) {
+            consider_similar_checkbox.removeAttribute('disabled');
+        }
     });
 
     // Get active tab info (url, favicon)
@@ -208,21 +216,41 @@ window.onload = () => {
         active_tab_name_div.innerHTML = extractHostname(tab[0].url);
         active_tab_name_div.parentNode.insertBefore(img, active_tab_name_div);
 
-        siteExists(extractHostname(tab[0].url), (result) => {
+        siteExists(extractHostname(tab[0].url), result => {
             if (result == true) {
                 console.log('Site exists in list');
                 hide_history_btn.setAttribute('disabled', 'disabled');
                 hide_history_btn.innerHTML = 'History of this site is hidden';
                 active_tab_name_div.classList.add('active-tab-name__hidden');
+
+                chrome.storage.sync.get('site_list', results => {
+                    if (!('consider_similar' in results['site_list'][extractHostname(tab[0].url)])) {
+                        results['site_list'][extractHostname(tab[0].url)]['consider_similar'] = false;
+                    }
+                    if (results['site_list'][extractHostname(tab[0].url)]['consider_similar']) {
+                        consider_similar_checkbox.setAttribute('checked', '');
+                    }
+                });
+                consider_similar_checkbox.addEventListener('change', event => {
+                    chrome.storage.sync.get('site_list', results => {
+                        let updated_site_list = results.site_list;
+                        updated_site_list[extractHostname(tab[0].url)]['consider_similar'] = event.target.checked;
+                        chrome.storage.sync.set({ site_list: updated_site_list });
+                    });
+                });
+            } else if (result == false) {
+                console.log('Site doesn\'t exists in list');
+                consider_similar_checkbox.setAttribute('disabled', '');
             }
         });
 
-        chrome.history.search({text: extractHostname(tab[0].url)}, (results) => {
+        chrome.history.search({ text: extractHostname(tab[0].url) }, results => {
             let history_count = document.createElement('b');
             history_count.innerHTML = " (" + results.length + ")";
             active_tab_name_div.appendChild(history_count);
-            chrome.browserAction.setBadgeText({text: String(results.length), tabId: tab[0].id});
+            chrome.browserAction.setBadgeText({ text: String(results.length), tabId: tab[0].id });
         });
+
     });
 
     // ------------------

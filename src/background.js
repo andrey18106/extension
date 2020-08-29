@@ -17,7 +17,7 @@ function extractHostname(url) {
 function removeSiteHistory(site_url) {
     // Searches the history for the last visit time
     // TODO: Change for searching the history for all the visit time
-    chrome.history.search({text: site_url}, (results) => {
+    chrome.history.search({text: site_url}, results => {
         for (let result of results) {
             chrome.history.deleteUrl({url: result.url});
         }
@@ -25,10 +25,12 @@ function removeSiteHistory(site_url) {
 }
 
 function siteExists(url, callback) {
-    chrome.storage.sync.get('site_list', (result) => {
+    chrome.storage.sync.get('site_list', result => {
         if (result.site_list) {
             if (url in result.site_list) {
                 callback(true);
+            } else {
+                callback(false);
             }
         }
     });
@@ -58,11 +60,11 @@ function setupDefaultSettings() {
 
 chrome.runtime.onInstalled.addListener(() => {
 
-    chrome.storage.sync.getBytesInUse((result) => {
+    chrome.storage.sync.getBytesInUse(result => {
         console.log(result);
     });
 
-    chrome.storage.sync.get('settings', (result) => {
+    chrome.storage.sync.get('settings', result => {
         if (!('settings' in result)) {
             console.log('Settings are not installed');
             setupDefaultSettings();
@@ -77,7 +79,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 
 function updateBadge(tabId) {
     chrome.tabs.get(tabId, (tab) => {
-        chrome.history.search({ text: extractHostname(tab.url) }, (results) => {
+        chrome.history.search({ text: extractHostname(tab.url) }, results => {
             chrome.browserAction.setBadgeText({ text: String(results.length), tabId: tab.id });
         });
     });
@@ -85,8 +87,8 @@ function updateBadge(tabId) {
 
 chrome.tabs.onHighlighted.addListener((highLightInfo) => {
     updateBadge(highLightInfo.tabIds[0]);
-    chrome.tabs.get(highLightInfo.tabIds[0], (tab) => {
-        siteExists(extractHostname(tab.url), (result) => {
+    chrome.tabs.get(highLightInfo.tabIds[0], tab => {
+        siteExists(extractHostname(tab.url), result => {
             if (result) {
                 removeSiteHistory(extractHostname(tab.url));
                 updateBadge(highLightInfo.tabIds[0]);
@@ -97,7 +99,7 @@ chrome.tabs.onHighlighted.addListener((highLightInfo) => {
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     updateBadge(tabId);
-    siteExists(extractHostname(tab.url), (result) => {
+    siteExists(extractHostname(tab.url), result => {
         if (result) {
             removeSiteHistory(extractHostname(tab.url));
             updateBadge(tabId);
